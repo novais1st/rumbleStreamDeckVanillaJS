@@ -4,7 +4,7 @@ function createButtons() {
   const buttonWidth = 130;
   const buttonHeight = 80;
   const margin = 10;
-  const maxButtonsPerRow = 8;
+  const maxButtonsPerRow = 8  ;
   const maxWidth = (buttonWidth + margin) * maxButtonsPerRow + margin;
   const maxButtons = maxButtonsPerRow * Math.floor(window.innerHeight / (buttonHeight + margin));
 
@@ -33,4 +33,13 @@ function createButtons() {
 
 createButtons();
 
+
+
+
+
+function testButton(){
+  const botao = document.getElementById(0);
+  botao.innerHTML = "Teste";
+}
+testButton();
 window.addEventListener("resize", createButtons);
