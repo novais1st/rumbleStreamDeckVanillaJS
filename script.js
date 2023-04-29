@@ -1,10 +1,11 @@
 const buttonWrapper = document.querySelector(".button-wrapper");
+let buttonsData;
 
 function createButtons() {
   const buttonWidth = 130;
   const buttonHeight = 80;
   const margin = 10;
-  const maxButtonsPerRow = 8  ;
+  const maxButtonsPerRow = 8;
   const maxWidth = (buttonWidth + margin) * maxButtonsPerRow + margin;
   const maxButtons = maxButtonsPerRow * Math.floor(window.innerHeight / (buttonHeight + margin));
 
@@ -21,25 +22,59 @@ function createButtons() {
 
   const buttonArray = new Array(numButtons).fill(null);
 
+  // gera os botões dinamicamente
   buttonWrapper.innerHTML = buttonArray.map((_, index) => {
     return `
-      <div class='button' id='${index}'>
-        Button
-        <span class='button-label'>Label ${index}</span>
+      <div class='button' id='button-${index}'>
+        <span class='button-label'>vazio ${index}</span>
+        
       </div>
     `;
   }).join("");
+
+  // carrega o arquivo JSON e altera os labels dos botões
+  fetch('buttons.json')
+  .then(response => response.json())
+  .then(data => {
+    buttonsData = data;
+    buttonLabel = buttonsData.slice(0, numButtons);
+    buttonLabel.forEach((botao, index) => {
+      // altera o label do botão
+      const buttonLabel = document.querySelector(`#button-${index} .button-label`);
+      if(botao.labelButton){
+        buttonLabel.innerText = botao.labelButton;
+      }else{
+        buttonLabel.innerText = "";
+      }
+    })
+  })
+  .then(() => {
+    const buttonPath = new Array(numButtons).fill(null);
+    buttonPath.forEach((_, index) => {
+      //Adiciona o som ao evento onclick do botão
+      const sound = new Audio(`http://localhost:5500/src/sounds/${index}.mp3`);
+      const buttonPath = document.querySelector(`#button-${index}`);
+      buttonPath.onclick = function() {
+        sound.play();
+      }
+    })
+  });
+
 }
 
 createButtons();
 
-
-
-
-
-function testButton(){
-  const botao = document.getElementById(0);
-  botao.innerHTML = "Teste";
-}
-testButton();
-window.addEventListener("resize", createButtons);
+window.addEventListener("resize", () => {
+  createButtons();
+  // utiliza a variável buttonsData para alterar os labels dos botões após a geração
+  if (buttonsData) {
+    buttonsData.forEach((botao, index) => {
+      const buttonLabel = document.querySelector(`#button-${index} .button-label`);
+      if(botao.labelButton){
+        buttonLabel.innerText = botao.labelButton;
+      }else{
+        buttonLabel.innerText = "";
+      }
+    });
+  }
+});
