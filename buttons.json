@@ -1,19 +1,19 @@
 [
     {
         "id": 0,
-        "path": "./src/sounds/1.mp3",
+        "path": "./src/sounds/0.mp3",
         "nomeDoArquivo": "arquivo1.txt",
         "labelButton": "Ele gosta"
     },
     {
         "id": 1,
-        "path": "caminho/do/arquivo2",
+        "path": "./src/sounds/1.mp3",
         "nomeDoArquivo": "arquivo2.txt",
         "labelButton": "Brasil"
     },
     {
         "id": 2,
-        "path": "caminho/do/arquivo3",
+        "path": "./src/sounds/2.mp3",
         "nomeDoArquivo": "arquivo3.txt",
         "labelButton": "Ajuda"
     }
