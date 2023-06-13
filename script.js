@@ -1,4 +1,7 @@
 const buttonWrapper = document.querySelector(".button-wrapper");
+const checkEdit = document.querySelector('input[type="checkbox"]');
+
+
 let buttonsData;
 
 function createButtons() {
@@ -11,7 +14,7 @@ function createButtons() {
 
   let numButtonsPerRow;
   let numButtons;
-
+  
   if (window.innerWidth < maxWidth) {
     numButtonsPerRow = Math.floor((window.innerWidth - margin * 2) / (buttonWidth + margin));
   } else {
@@ -54,12 +57,23 @@ function createButtons() {
       //Adiciona o som ao evento onclick do botão
       const sound = new Audio(`http://localhost:5500/src/sounds/${index}.mp3`);
       const buttonPath = document.querySelector(`#button-${index}`);
+
       buttonPath.onclick = function() {
+        let check = checkEdit;
+        if(check.checked){
+          const editaJson = () => {
+            alert("test");
+            console.log("teste2");
+          }
+          editaJson();
+          
+        }else{
         sound.play();
+      }
       }
     })
   });
-
+  
 }
 
 createButtons();
@@ -77,4 +91,5 @@ window.addEventListener("resize", () => {
       }
     });
   }
+  
 });
