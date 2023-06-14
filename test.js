@@ -36,42 +36,43 @@ function createButtons() {
     })
     .join("");
 
-  loadButtonsData().then(() => {
-    buttonsData.slice(0, numButtons).forEach(botao => {
-      if (botao.id !== undefined && botao.id <= numButtons) {
-        const buttonLabel = document.querySelector(`#button-${botao.id} .button-label`);
-        if (botao.labelButton) {
-          buttonLabel.innerText = botao.labelButton;
-        } else {
-          buttonLabel.innerText = "";
-        }
-        const sound = new Audio(`http://localhost:5500${botao.path}`);
-        //const sound = new Audio(`http://localhost:5500/src/sounds/${botao.id}.mp3`);
-        const buttonPath = document.querySelector(`#button-${botao.id}`);
-
-        buttonPath.onclick = function () {
-          let check = checkEdit;
-          if (check.checked) {
-            const editaJson = () => {
-              // alert("test");
-              console.log(buttonsData);
-            };
-            editaJson();
-          } else {
-            sound.play();
-            console.log(botao.id+", som tocado");
-          }
-        };
-      }
-    });
-  });
-}
-
-function loadButtonsData() {
-  return fetch('buttons.json')
+  // Carrega o arquivo JSON e altera os labels dos botões
+  fetch('buttons.json')
     .then(response => response.json())
     .then(data => {
       buttonsData = data;
+      buttonsData.slice(0, numButtons).forEach(botao => {
+        if (botao.id !== undefined && botao.id < numButtons) {
+          const buttonLabel = document.querySelector(`#button-${botao.id} .button-label`);
+          if (botao.labelButton) {
+            buttonLabel.innerText = botao.labelButton;
+          } else {
+            buttonLabel.innerText = "";
+          }
+        }
+      });
+    })
+    .then(() => {
+      buttonsData.slice(0, numButtons).forEach(botao => {
+        if (botao.id !== undefined && botao.id < numButtons) {
+          // Adiciona o som ao evento onclick do botão
+          const sound = new Audio(`http://localhost:5500${botao.path}`);
+          const buttonPath = document.querySelector(`#button-${botao.id}`);
+
+          buttonPath.onclick = function () {
+            let check = checkEdit;
+            if (check.checked) {
+              const editaJson = () => {
+                // alert("test");
+                console.log(buttonsData);
+              };
+              editaJson();
+            } else {
+              sound.play();
+            }
+          };
+        }
+      });
     });
 }
 
@@ -83,7 +84,6 @@ window.addEventListener("resize", () => {
   if (buttonsData) {
     buttonsData.slice(0, numButtons).forEach(botao => {
       if (botao.id !== undefined && botao.id < numButtons) {
-        let v = botao.id+1;
         const buttonLabel = document.querySelector(`#button-${botao.id} .button-label`);
         if (botao.labelButton) {
           buttonLabel.innerText = botao.labelButton;
