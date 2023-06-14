@@ -18,7 +18,7 @@
         "labelButton": "Ajuda"
     },
     {
-        "id": 9,
+        "id": 5,
         "path": "./src/sounds/3.mp3",
         "nomeDoArquivo": "arquivo3.txt",
         "labelButton": "teste"

@@ -40,7 +40,7 @@ function createButtons() {
   .then(response => response.json())
   .then(data => {
     buttonsData = data;
-    buttonLabel = buttonsData.slice(0, numButtons);
+    buttonLabel = buttonsData.slice(0, numButtons)
     buttonLabel.forEach((botao, index) => {
       // altera o label do botão
       const buttonLabel = document.querySelector(`#button-${index} .button-label`);
@@ -62,8 +62,11 @@ function createButtons() {
         let check = checkEdit;
         if(check.checked){
           const editaJson = () => {
-            alert("test");
-            console.log("teste2");
+              
+
+
+            //alert("test");
+            console.log(buttonsData);
           }
           editaJson();
           
