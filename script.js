@@ -58,8 +58,12 @@ function createButtons() {
             };
             editaJson();
           } else {
+           // sound.addEventListener('loadeddata', function(){
+           //   console.log('audio carregado');
+              
+           // })
             sound.play();
-            console.log(botao.id+", som tocado");
+            
           }
         };
       }

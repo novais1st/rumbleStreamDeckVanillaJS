@@ -19,13 +19,13 @@
     },
     {
         "id": 9,
-        "path": "/src/sounds/3.mp3",
+        "path": "/src/sounds/15.mp3",
         "nomeDoArquivo": "arquivo3.txt",
         "labelButton": "teste"
     },
     {
         "id": 15,
-        "path": "/src/sounds/2.mp3",
+        "path": "/src/sounds/15.mp3",
         "nomeDoArquivo": "arquivo3.txt",
         "labelButton": "151515"
     }
